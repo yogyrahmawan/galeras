@@ -4,7 +4,7 @@ support mariadb10.1
 #### Requirement 
 * docker 
 * go1.10
-* go get -u github.com/golang/dep/cmd/dep
+* `go get -u github.com/golang/dep/cmd/dep` and `dep ensure -v`
 * build => `go build`
 * Please refer to docker-entrypoint.sh for further detail
 * Note that probably it takes a long time when run for the first time . because docker will pull image from the cloud
