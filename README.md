@@ -35,9 +35,6 @@ Node 3
 ./galeras node run --name=galera-node-3 --host 172.25.0.4 --env-file var/env_3.env --net galeranet --ip 172.25.0.4 --add-host galera-node-1:172.25.0.2,galera-node-2:172.25.0.3 --port 3306,4444,4567,4568 --image galera-mariadb:10.1 --additional-command mysqld,join
 ```
 
-
-The dockerentrypoint is based mjstealey with modification.
-
 #### monitor nodes 
 ```
 ./galeras monitor --username root --password root --node galera-node-1
@@ -54,3 +51,6 @@ Command :
 ```
 ./galeras runtest
 ```
+
+
+The dockerentrypoint is based mjstealey with modification.
