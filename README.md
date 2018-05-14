@@ -46,7 +46,8 @@ Node 3
 ```
 
 #### runtest nodes
-It will start 3 nodes . Command :
+It will start 3 nodes . By Default, this command will used image from `yogyrahmawan/galera-mariadb:10.1`. You can just run this below command or alternatively you can pull the image first by executing `docker pull yogyrahmawan/galera-mariadb:10.1`
+Command :
 ```
 ./galeras runtest
 ```
