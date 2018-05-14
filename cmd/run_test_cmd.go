@@ -24,6 +24,7 @@ func runTest3Nodes(cmd *cobra.Command, args []string) {
 	app.DockerPull("yogyrahmawan/galera-mariadb:10.1")
 
 	// remove all nodes
+	fmt.Println("Removing node if exist")
 	app.RemoveNode([]string{"galera-node-1", "galera-node-2", "galera-node-3"})
 
 	// run node one by one
@@ -40,7 +41,7 @@ func runTest3Nodes(cmd *cobra.Command, args []string) {
 	fmt.Println("starting node 2, Please wait for a moment")
 	app.RunNode("galera-node-2", "172.25.0.3", "var/env_2.env", "galeranet", "172.25.0.3", buildRunDockerCommand("galera-node-1:172.25.0.2,galera-node-3:172.25.0.4", "3306,4444,4567,4568", "yogyrahmawan/galera-mariadb:10.1", "mysqld,join"))
 	fmt.Println("==========================")
-	time.Sleep(10 * time.Second)
+	time.Sleep(20 * time.Second)
 	app.MonitorNode("root", "root", "galera-node-1", "SHOW STATUS LIKE 'wsrep_cluster_size';")
 	app.MonitorNode("root", "root", "galera-node-1", "SHOW STATUS LIKE 'wsrep_incoming_addresses';")
 	fmt.Println("==========================")
@@ -49,7 +50,7 @@ func runTest3Nodes(cmd *cobra.Command, args []string) {
 	fmt.Println("starting node 3, Please wait for a moment")
 	app.RunNode("galera-node-3", "172.25.0.4", "var/env_3.env", "galeranet", "172.25.0.4", buildRunDockerCommand("galera-node-1:172.25.0.2,galera-node-2:172.25.0.3", "3306,4444,4567,4568", "yogyrahmawan/galera-mariadb:10.1", "mysqld,join"))
 	fmt.Println("==========================")
-	time.Sleep(10 * time.Second)
+	time.Sleep(20 * time.Second)
 	app.MonitorNode("root", "root", "galera-node-1", "SHOW STATUS LIKE 'wsrep_cluster_size';")
 	app.MonitorNode("root", "root", "galera-node-1", "SHOW STATUS LIKE 'wsrep_incoming_addresses';")
 	fmt.Println("==========================")
