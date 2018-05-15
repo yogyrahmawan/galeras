@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
+	"strconv"
 	"strings"
 )
 
@@ -149,7 +150,7 @@ func RemoveNode(name []string) error {
 }
 
 // MonitorNode monitor cluster node
-func MonitorNode(username, password, node, query string) error {
+func MonitorNode(username, password, node, query string) (*MonitorResp, error) {
 	dockerArgs := []string{
 		"exec",
 		node,
@@ -168,11 +169,48 @@ func MonitorNode(username, password, node, query string) error {
 	err := cmd.Run()
 	if err != nil {
 		fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
-		return err
+		return nil, err
 	}
-	fmt.Println(out.String())
 
-	return nil
+	strValue := strings.TrimSpace(out.String())
+	mRes, err := parseResponse(strValue)
+	if err != nil {
+		fmt.Println(fmt.Sprint(err) + ": " + stderr.String())
+		return nil, err
+	}
+
+	fmt.Println(mRes.String())
+
+	return mRes, nil
+}
+
+func parseResponse(str string) (*MonitorResp, error) {
+	vals := strings.Split(str, "\n")
+	var name, value string
+
+	if len(vals) > 1 {
+		lastVals := vals[1]
+		if strings.Contains(lastVals, "wsrep_cluster_size") {
+			name = "wsrep_cluster_size"
+			lastVals = strings.Replace(lastVals, name, "", -1)
+			value = strings.TrimSpace(lastVals)
+			num, err := strconv.Atoi(value)
+			if err != nil {
+				return nil, err
+			}
+			NumberOfStartedNode = num
+		} else if strings.Contains(lastVals, "wsrep_incoming_addresses") {
+			name = "wsrep_incoming_addresses"
+			lastVals = strings.Replace(lastVals, name, "", -1)
+			value = strings.TrimSpace(lastVals)
+
+		}
+	}
+
+	return &MonitorResp{
+		Name:  name,
+		Value: value,
+	}, nil
 }
 
 // DockerPull pull image

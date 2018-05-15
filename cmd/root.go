@@ -17,4 +17,5 @@ func init() {
 	RootCmd.AddCommand(NewMonitorCommand())
 	RootCmd.AddCommand(NewRunTestCommand())
 	RootCmd.AddCommand(NewPullCommand())
+	RootCmd.AddCommand(NewRunWsServer())
 }

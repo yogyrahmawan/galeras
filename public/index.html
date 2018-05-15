@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Galera Monitoring</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/css/materialize.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/emojione/2.2.6/assets/css/emojione.min.css"/>
+    <link rel="stylesheet" href="/style.css">
+
+</head>
+<body>
+<header>
+    <nav>
+        <div class="nav-wrapper">
+            <a href="/" class="brand-logo right">Galera Monitor</a>
+        </div>
+    </nav>
+</header>
+<main id="app">
+    <div class="row">
+        <div id="data-name" class="col s5"></div>
+        <div id="data-value" class="col s3">Monitor Number of nodes</div>
+    </div>
+    <div class="row">
+        <div id="data-name" class="col s4"></div>
+        <div class="col s3">Active Nodes</div>
+        <div class="col s3"> 
+            {{ activeNode }} 
+        </div>
+        <div id="data-value" class="col s2"></div>
+    </div>
+    
+</main>
+<footer class="page-footer">
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://cdn.jsdelivr.net/emojione/2.2.6/lib/js/emojione.min.js"></script>
+<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.8/js/materialize.min.js"></script>
+<script src="/app.js"></script>
+</body>
+</html>
