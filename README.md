@@ -52,5 +52,22 @@ Command :
 ./galeras runtest
 ```
 
+#### run websocket 
+Command : 
+```
+./galeras runwsserver --path path_to_public_html_file
+```
+example :
+```
+./galeras runwsserver --path "/Volumes/hdd storage/Users/yogydev/Development/projects/golang/src/github.com/yogyrahmawan/galeras/public"
+```
+
+#### open client 
+you can open initial web client by open `localhost:3000` on your browser 
+
+
+
+
+
 
 The dockerentrypoint is based mjstealey with modification.
