@@ -58,21 +58,6 @@ RUN yum -y -v update && yum -y -v install \
     socat \
     jemalloc
 
-ENV WSREP_ON=ON
-ENV WSREP_PROVIDER=/usr/lib64/galera/libgalera_smm.so
-ENV WSREP_PROVIDER_OPTIONS=''
-ENV WSREP_CLUSTER_ADDRESS='gcomm://'
-ENV WSREP_CLUSTER_NAME='galera'
-ENV WSREP_NODE_ADDRESS='localhost'
-ENV WSREP_NODE_NAME='galera1'
-ENV WSREP_SST_METHOD=rsync
-ENV BINLOG_FORMAT=row
-ENV DEFAULT_STORAGE_ENGINE=InnoDB
-ENV INNODB_AUTOINC_LOCK_MODE=2
-ENV BIND_ADDRESS=0.0.0.0
-ENV MYSQL_ROOT_PASSWORD=root
-
-
 ADD ./docker-entrypoint.sh /docker-entrypoint.sh
 
 EXPOSE 3306 4444 4567 4568

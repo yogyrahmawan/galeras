@@ -151,6 +151,8 @@ func RemoveNode(name []string) error {
 
 // MonitorNode monitor cluster node
 func MonitorNode(username, password, node, query string) (*MonitorResp, error) {
+	var out bytes.Buffer
+	var stderr bytes.Buffer
 	dockerArgs := []string{
 		"exec",
 		node,
@@ -162,8 +164,6 @@ func MonitorNode(username, password, node, query string) (*MonitorResp, error) {
 	}
 
 	cmd := exec.Command("docker", dockerArgs...)
-	var out bytes.Buffer
-	var stderr bytes.Buffer
 	cmd.Stdout = &out
 	cmd.Stderr = &stderr
 	err := cmd.Run()
